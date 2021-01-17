@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connections</title>
+</head>
+
+
+<body>
+<% include ./common/header.ejs %>
+<div class="container">
+    <!--       content goes here -->
+    <div class="row h-100">
+        <div class="col-12 my-auto">
+            <div class="jumbotron bg-white">
+                <% for(let i=0; i<data.topics.length; i++){ %>
+                    <h3> <%= data.topics[i] %></h3>
+                    <ul class="list-group list-group-flush ml-3">
+                        <% for(let j=0; j < data.connections.length; j++){
+                            if(data.connections[j].connectionTopic === data.topics[i] ){%>
+                            <li class="list-group-item border-0"><a href="/connection/<%= data.connections[j].connectionId%>"><%= data.connections[j].connectionName %></a></li>
+                           <% } %>
+
+                       <% }%>
+                    </ul>
+               <% } %>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+
+
+<% include ./common/footer.ejs %>
+
+</body>
+
+</html>
