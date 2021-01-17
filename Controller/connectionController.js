@@ -13,7 +13,6 @@ router.get('/connections', async function(req, res, next) {
     let connections = [];
     // get the topics from ConnectionDb
     let topics = getTopics();
-    console.log(topics)
     // getting all connections from db and creating Connection data object 
     connections = connectionDB.getConnections();
   
@@ -21,8 +20,29 @@ router.get('/connections', async function(req, res, next) {
       "topics": topics,
       "connections": connections,
     };
-    console.log(connections)
     res.render('connections', { data: data});
+});
+
+router.get('/connection/:connectionId', async function(req, res, next) {
+    let connectionId = req.params.connectionId;
+    let connection;
+    // validate data
+    if (validateConnectionId(connectionId)){
+      try{
+        // getting specific connection from DB
+        connection = connectionDB.getConnection(connectionId);
+
+        let data = {
+          "connection": connection,
+        };
+  
+        res.render('connection', { data: data});
+      } catch (e) {
+        res.redirect('/connections');
+      }
+    } else{
+      res.redirect('/connections');
+    }
 });
 
 router.get('/about', function (req, res) {
@@ -46,4 +66,18 @@ let getTopics = function() {
     });
     return topics;
 };
+
+function validateConnectionId(connectionId) {
+
+    if (connectionId !== undefined) {
+      if (Number.isInteger(Number.parseInt(connectionId))) {
+        return true;
+      } else{
+        return false;
+      }
+    } else{
+      return false;
+    }
+}
+
 module.exports = router;

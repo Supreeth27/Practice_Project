@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connection</title>
+
+</head>
+<body>
+<% include ./common/header.ejs %>
+<div class="container">
+
+    <!--       content goes here -->
+    <div class="row mt-5">
+        <div class="col-9 my-auto">
+                <h4><%= data.connection.connectionName %></h4>
+            <div class="card mb-3 border-0">
+                <div class="row no-gutters">
+                    <div class="col-4">
+                        <img src="/images/<%= data.connection.image %>" class="card-img" alt="eventImage" />
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Hosted by <%= data.connection.host %></h5>
+                            <p class="card-text"> <%= data.connection.date %></p>
+                            <p class="card-text"><%= data.connection.startTime %> - <%= data.connection.endTime %> </p>
+                            <p class="card-text"><%= data.connection.location %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 ft">
+            <span>
+            <p>Are you going? 3 people going</p>
+            <form method="get">
+				          <input hidden name="connectionId" value="<%= data.connection.connectionId %>">
+				          <button type="submit" class="btn btn-success" name="rsvp" value="Yes">Yes</button>
+				          <button type="submit" class="btn btn-danger" name="rsvp" value="No">No</button>
+                  <button type="submit" class="btn btn-blue" name="rsvp" value="Maybe">Maybe</button>
+			      </form>
+            </span>
+        </div>
+    </div>
+
+    <div class="row mt-10">
+        <div class="col-12">
+            <h3>Details</h3>
+                <p class="ml auto"><%= data.connection.detail %></p>
+        </div>
+    </div>
+
+</div>
+</div>
+
+</div>
+
+<% include ./common/footer.ejs %>
+</body>
+</html>

@@ -19,7 +19,23 @@ var getConnections = function () {
     return connections;
 };
 
-
+var getConnection = function (id) {
+    for (var i = 0; i < connectionData.length; i++) {
+        if (parseInt(connectionData[i].connectionId) == id) {
+            let connection = new Connection(connectionData[i].connectionId,
+                connectionData[i].name,
+                connectionData[i].topic,
+                connectionData[i].detail,
+                connectionData[i].location,
+                connectionData[i].host,
+                connectionData[i].date,
+                connectionData[i].startTime,
+                connectionData[i].endTime,
+                connectionData[i].image);
+            return connection;
+        }
+    }
+};
 
 var connectionData = [
     {
@@ -104,5 +120,6 @@ var connectionData = [
 ];
 
 module.exports = {
-    getConnections: getConnections,
+    getConnection: getConnection,
+    getConnections: getConnections
 };
